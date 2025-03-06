@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _sliderMoveSpeed;
 
     private StateController _stateController;
-    private float _startingMovement , _startingJumping;
+    private float _startingMovement, _startingJumping;
     private Rigidbody _PlayerRigidbody;
     private float _horizontalInput, _verticalInput;
     private Vector3 _movementDirection;
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
         _startingJumping = _moveJumpSpeed;
 
     }
-    
+
 
     private void Update()
     {
@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
             PlayerState.Move => 1f,
             PlayerState.Slide => _sliderMoveSpeed,
             PlayerState.Jump => _airMultiplier,
-             _ => 1f
+            _ => 1f
 
         };
         _PlayerRigidbody.AddForce(_movementDirection.normalized * _movementSpeed * forceMultiplier, ForceMode.Force);
@@ -151,6 +151,29 @@ public class PlayerController : MonoBehaviour
     private Vector3 GetMovementDirection()
     {
         return _movementDirection.normalized;
+
+    }
+
+    public void SetMovementSpeed(float speed , float duration)
+    {
+        _movementSpeed += speed;
+        Invoke(nameof(ResetMovementSpeed),duration);
+
+    }
+    public void ResetMovementSpeed()
+    {
+        _movementSpeed = _startingMovement;
+
+    }
+    public void SetJumpForce(float force , float duration)
+    {
+        _moveJumpSpeed += force;
+        Invoke(nameof(ResetJumpForce),duration);
+
+    }
+    public void ResetJumpForce()
+    {
+        _moveJumpSpeed = _startingJumping;
 
     }
 }
