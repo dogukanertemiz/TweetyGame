@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _sliderMoveSpeed;
 
     private StateController _stateController;
-    private PlayerController _playerController;
+    private float _startingMovement , _startingJumping;
     private Rigidbody _PlayerRigidbody;
     private float _horizontalInput, _verticalInput;
     private Vector3 _movementDirection;
@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
         _PlayerRigidbody = GetComponent<Rigidbody>();
         _PlayerRigidbody.freezeRotation = true;
         _stateController = GetComponent<StateController>();
+        _startingMovement = _movementSpeed;
+        _startingJumping = _moveJumpSpeed;
 
     }
     
